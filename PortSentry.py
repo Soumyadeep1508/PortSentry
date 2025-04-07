@@ -39,7 +39,7 @@ def cleanup_and_check():
 def packet_handler(packet):
     """Process each captured packet."""
     global last_cleanup_time
-    if packet.haslayer(TCP) and packet[TCP].flags & 0x02:  # TCP SYN flag
+    if packet.haslayer(TCP) and packet.haslayer(IP) and packet[TCP].flags & 0x02:  # TCP SYN flag
         src_ip = packet[IP].src
         dst_ip = packet[IP].dst
         dst_port = packet[TCP].dport
