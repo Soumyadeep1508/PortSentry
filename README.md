@@ -1,3 +1,33 @@
+How the Tool Works
+
+Packet Capture:
+The tool uses Scapy’s sniff function to capture TCP packets in real-time from a specified network interface (e.g., eth0). It filters for TCP packets to focus on connection attempts.
+
+
+SYN Packet Detection:
+For each packet, it checks if the TCP SYN flag is set (flags & 0x02), indicating a connection initiation attempt typical of port scans.
+
+
+Tracking Activity:
+A dictionary (data) stores entries with keys as (source_ip, destination_ip) tuples.
+Values are lists of (timestamp, destination_port) tuples, recording when and which ports were targeted.
+
+
+Periodic Cleanup and Analysis:
+Every 5 seconds (configurable), the tool cleans up old entries (older than the time window, e.g., 10 seconds).
+It then counts unique ports per source-destination pair within the time window.
+If the count exceeds a threshold (e.g., 10 ports), it flags a possible port scan.
+
+
+Alerting:
+Alerts are printed to the console, showing the source IP, destination IP, and number of ports scanned, providing immediate feedback.
+
+
+Configurability:
+Users can specify the network interface, time window, and port threshold via command-line arguments.
+
+
+
 Usage Instructions
 
 Prerequisites:
