@@ -40,7 +40,7 @@ Execute with root privileges (sudo) due to raw packet access.
 
 Running the Tool:
 
-sudo python3 intrusion_detector.py -i eth0 -t 10 -p 10
+sudo python3 PortSentry.py -i eth0 -t 10 -p 10
 
 -i eth0: Sniff on interface eth0 (replace with your interface).
 
